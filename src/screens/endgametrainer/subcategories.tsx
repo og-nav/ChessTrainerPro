@@ -56,7 +56,7 @@ const Subcategories = ({ route, navigation }: SubcategoriesProp) => {
         data={subcategoriesData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
-        numColumns={2}
+        numColumns={3}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'center',

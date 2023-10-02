@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, useWindowDimensions } from 'react-native';
 import type { CompositeScreenProps } from '@react-navigation/native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { DrawerScreenProps } from '@react-navigation/drawer';
@@ -18,6 +18,7 @@ type PositionsProp = CompositeScreenProps<
 >;
 
 const Positions = ({ route, navigation }: PositionsProp) => {
+  const { width } = useWindowDimensions();
   const positionsData = route.params.games;
   const handlePressBackButton = useCallback(() => {
     navigation.goBack();
@@ -33,7 +34,7 @@ const Positions = ({ route, navigation }: PositionsProp) => {
       };
     }) => (
       <AnimatedPressable
-        style={{ height: 150, width: 150, margin: 12 }}
+        style={{ height: width / 3, width: width / 3, margin: 12 }}
         key={item.fen}
         //sharedTransitionTag={item.fen}
         //sharedTransitionStyle={sharedTransition}
@@ -42,11 +43,12 @@ const Positions = ({ route, navigation }: PositionsProp) => {
             fen: item.fen,
             target: item.target,
           });
-        }}>
-        <DisplayBoard boardSize={150} fen={item.fen} />
+        }}
+      >
+        <DisplayBoard boardSize={width / 3} fen={item.fen} />
       </AnimatedPressable>
     ),
-    [navigation],
+    [navigation]
   );
   return (
     <AnimatedView style={{ flex: 1 }} safe={true}>

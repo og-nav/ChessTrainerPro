@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, useWindowDimensions, View } from 'react-native';
 import { AnimatedView, AnimatedPressable, AnimatedText } from './';
 import { subcategoryToIcons, pieceSetExports } from '../util';
 import { primary } from '../contexts/ThemeContext';
@@ -16,31 +16,35 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
   onPress,
 }) => {
   const icons = subcategoryToIcons(name);
+  const { width } = useWindowDimensions();
   return (
     <AnimatedView
       key={`subcategoriescard${name}${id}`}
       style={{
-        height: 160,
-        width: 160,
+        height: width / 5,
+        width: width / 5,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 12,
-      }}>
+      }}
+    >
       <AnimatedPressable
         key={`subcategoriescardbutton${name}${id}`}
         style={{
-          height: 160,
-          width: 160,
+          height: width / 5,
+          width: width / 5,
           borderRadius: 15,
           borderWidth: 3,
           padding: 4,
         }}
-        onPress={onPress}>
+        onPress={onPress}
+      >
         <View
           style={{
             flex: 1,
             flexDirection: 'column',
-          }}>
+          }}
+        >
           <View
             style={{
               flex: 1,
@@ -48,7 +52,8 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
               justifyContent: 'space-around',
               alignItems: 'center',
               marginVertical: 20,
-            }}>
+            }}
+          >
             <View
               style={{
                 flex: 1,
@@ -56,16 +61,17 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 marginBottom: 25,
-              }}>
+              }}
+            >
               {icons[0].map((t, i) => {
                 const res = pieceSetExports[t as keyof typeof pieceSetExports];
                 return (
                   <Image
                     source={res.source}
                     alt={res.alt}
-                    resizeMode="contain"
+                    resizeMode='contain'
                     key={`${res.alt} subcategories ${i}`}
-                    style={{ height: 40, width: 40 }}
+                    style={{ height: width / 20, width: width / 20 }}
                   />
                 );
               })}
@@ -76,7 +82,8 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                   justifyContent: 'space-around',
                   alignItems: 'center',
                   marginVertical: 0,
-                }}>
+                }}
+              >
                 {icons[1].map((t, i) => {
                   const res =
                     pieceSetExports[t as keyof typeof pieceSetExports];
@@ -84,9 +91,9 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                     <Image
                       source={res.source}
                       alt={res.alt}
-                      resizeMode="contain"
+                      resizeMode='contain'
                       key={`${res.alt} subcategories ${i}`}
-                      style={{ height: 20, width: 20 }}
+                      style={{ height: width / 40, width: width / 40 }}
                     />
                   );
                 })}
@@ -101,7 +108,8 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                   justifyContent: 'space-around',
                   alignItems: 'center',
                   marginTop: 20,
-                }}>
+                }}
+              >
                 {icons[2].map((t, i) => {
                   const res =
                     pieceSetExports[t as keyof typeof pieceSetExports];
@@ -109,9 +117,9 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                     <Image
                       source={res.source}
                       alt={res.alt}
-                      resizeMode="contain"
+                      resizeMode='contain'
                       key={`${res.alt} subcategories ${i}`}
-                      style={{ height: 40, width: 40 }}
+                      style={{ height: width / 20, width: width / 20 }}
                     />
                   );
                 })}
@@ -148,11 +156,13 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
             style={{
               flex: 1,
               textAlign: 'center',
+              fontSize: width / 50,
             }}
             customColors={{
               light: primary[100],
               dark: 'white',
-            }}>
+            }}
+          >
             {name}
           </AnimatedText>
         </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
 import { AnimatedView, AnimatedPressable, AnimatedText } from './';
 import { EndgameIcons } from '../util';
 import { primary } from '../contexts/ThemeContext';
@@ -17,20 +17,22 @@ const CategoriesCard: React.FC<CategoriesCardProps> = ({
   id,
   onPress,
 }) => {
+  const { width } = useWindowDimensions();
   return (
     <AnimatedView
       key={`categoriescard${name}${id}`}
       style={{
-        height: 180,
-        width: 160,
+        height: width / 5,
+        width: width / 5,
+        margin: 12,
         justifyContent: 'center',
         alignItems: 'center',
       }}>
       <AnimatedPressable
         key={`categoriescardbutton${name}${id}`}
         style={{
-          height: 140,
-          width: 140,
+          height: width / 5,
+          width: width / 5,
           borderRadius: 15,
           borderWidth: 3,
         }}
@@ -55,6 +57,7 @@ const CategoriesCard: React.FC<CategoriesCardProps> = ({
               flex: 1,
               textAlign: 'center',
               justifyContent: 'space-around',
+              fontSize: width / 40,
             }}
             customColors={{
               light: primary[100],
