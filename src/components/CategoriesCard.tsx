@@ -17,13 +17,13 @@ const CategoriesCard: React.FC<CategoriesCardProps> = ({
   id,
   onPress,
 }) => {
-  const { width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
   return (
     <AnimatedView
       key={`categoriescard${name}${id}`}
       style={{
-        height: width / 5,
-        width: width / 5,
+        height: height / 6,
+        width: height / 6,
         margin: 12,
         justifyContent: 'center',
         alignItems: 'center',
@@ -31,10 +31,10 @@ const CategoriesCard: React.FC<CategoriesCardProps> = ({
       <AnimatedPressable
         key={`categoriescardbutton${name}${id}`}
         style={{
-          height: width / 5,
-          width: width / 5,
+          height: height / 6,
+          width: height / 6,
           borderRadius: 15,
-          borderWidth: 3,
+          borderWidth: 2,
         }}
         onPress={onPress}>
         <View
@@ -57,7 +57,7 @@ const CategoriesCard: React.FC<CategoriesCardProps> = ({
               flex: 1,
               textAlign: 'center',
               justifyContent: 'space-around',
-              fontSize: width / 40,
+              fontSize: height / 50,
             }}
             customColors={{
               light: primary[100],

@@ -45,7 +45,7 @@ const Subcategories = ({ route, navigation }: SubcategoriesProp) => {
       />
     ),
 
-    [navigation],
+    [navigation]
   );
   return (
     <AnimatedView style={{ flex: 1 }} safe={true}>
@@ -56,7 +56,7 @@ const Subcategories = ({ route, navigation }: SubcategoriesProp) => {
         data={subcategoriesData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
-        numColumns={3}
+        numColumns={2}
         contentContainerStyle={{
           flexDirection: 'column',
           alignItems: 'center',

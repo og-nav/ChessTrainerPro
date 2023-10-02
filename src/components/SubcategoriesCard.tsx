@@ -16,13 +16,13 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
   onPress,
 }) => {
   const icons = subcategoryToIcons(name);
-  const { width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
   return (
     <AnimatedView
       key={`subcategoriescard${name}${id}`}
       style={{
-        height: width / 5,
-        width: width / 5,
+        height: height / 6,
+        width: height / 6,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 12,
@@ -31,10 +31,10 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
       <AnimatedPressable
         key={`subcategoriescardbutton${name}${id}`}
         style={{
-          height: width / 5,
-          width: width / 5,
+          height: height / 6,
+          width: height / 6,
           borderRadius: 15,
-          borderWidth: 3,
+          borderWidth: 2,
           padding: 4,
         }}
         onPress={onPress}
@@ -71,7 +71,7 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                     alt={res.alt}
                     resizeMode='contain'
                     key={`${res.alt} subcategories ${i}`}
-                    style={{ height: width / 20, width: width / 20 }}
+                    style={{ height: height / 25, width: height / 25 }}
                   />
                 );
               })}
@@ -93,7 +93,7 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                       alt={res.alt}
                       resizeMode='contain'
                       key={`${res.alt} subcategories ${i}`}
-                      style={{ height: width / 40, width: width / 40 }}
+                      style={{ height: height / 45, width: height / 45 }}
                     />
                   );
                 })}
@@ -119,7 +119,7 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
                       alt={res.alt}
                       resizeMode='contain'
                       key={`${res.alt} subcategories ${i}`}
-                      style={{ height: width / 20, width: width / 20 }}
+                      style={{ height: height / 25, width: height / 25 }}
                     />
                   );
                 })}
@@ -156,7 +156,8 @@ const SubcategoriesCard: React.FC<SubcategoriesCardProps> = ({
             style={{
               flex: 1,
               textAlign: 'center',
-              fontSize: width / 50,
+              fontSize: height / 70,
+              marginTop: 5
             }}
             customColors={{
               light: primary[100],

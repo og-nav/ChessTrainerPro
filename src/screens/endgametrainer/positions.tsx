@@ -34,7 +34,7 @@ const Positions = ({ route, navigation }: PositionsProp) => {
       };
     }) => (
       <AnimatedPressable
-        style={{ height: width / 3, width: width / 3, margin: 12 }}
+        style={{ height: width / 2.5, width: width / 2.5, margin: 12 }}
         key={item.fen}
         //sharedTransitionTag={item.fen}
         //sharedTransitionStyle={sharedTransition}
@@ -45,7 +45,7 @@ const Positions = ({ route, navigation }: PositionsProp) => {
           });
         }}
       >
-        <DisplayBoard boardSize={width / 3} fen={item.fen} />
+        <DisplayBoard boardSize={width / 2.5} fen={item.fen} />
       </AnimatedPressable>
     ),
     [navigation]

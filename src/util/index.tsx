@@ -69,7 +69,7 @@ export const pieceSetExports = {
 };
 
 const w = Dimensions.get('window').width / 12;
-const h = Dimensions.get('window').height / 12;
+const h = Dimensions.get('window').height / 15;
 export const EndgameIcons = {
  
   'wP.png': (
@@ -78,7 +78,7 @@ export const EndgameIcons = {
       alt="white pawn"
       resizeMode="contain"
       key="white pawn endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'wB.png': (
@@ -87,7 +87,7 @@ export const EndgameIcons = {
       alt="white bishop"
       resizeMode="contain"
       key="white bishop endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'wK.png': (
@@ -96,7 +96,7 @@ export const EndgameIcons = {
       alt="white king"
       resizeMode="contain"
       key="white king endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'wR.png': (
@@ -105,7 +105,7 @@ export const EndgameIcons = {
       alt="white rook"
       resizeMode="contain"
       key="white rook endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'wQ.png': (
@@ -114,7 +114,7 @@ export const EndgameIcons = {
       alt="white queen"
       resizeMode="contain"
       key="white queen endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'wN.png': (
@@ -123,7 +123,7 @@ export const EndgameIcons = {
       alt="white knight"
       resizeMode="contain"
       key="white knight endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'bP.png': (
@@ -132,7 +132,7 @@ export const EndgameIcons = {
       alt="black pawn"
       resizeMode="contain"
       key="black pawn endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'bB.png': (
@@ -141,7 +141,7 @@ export const EndgameIcons = {
       alt="black bishop"
       resizeMode="contain"
       key="black bishop endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'bK.png': (
@@ -150,7 +150,7 @@ export const EndgameIcons = {
       alt="black king"
       resizeMode="contain"
       key="black king endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'bR.png': (
@@ -159,7 +159,7 @@ export const EndgameIcons = {
       alt="black rook"
       resizeMode="contain"
       key="black rook endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'bQ.png': (
@@ -168,7 +168,7 @@ export const EndgameIcons = {
       alt="black queen"
       resizeMode="contain"
       key="black queen endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'bN.png': (
@@ -177,14 +177,14 @@ export const EndgameIcons = {
       alt="black knight"
       resizeMode="contain"
       key="black knight endgame icon"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
     />
   ),
   'easy.png': (
     <Image
       source={require('../assets/endgameicons/easy.png')}
       alt="pacifier"
-      style={{ width: w / 2, height: h / 2 }}
+      style={{ width: h, height: h }}
       resizeMode="contain"
       key="pacifier"
     />
@@ -193,7 +193,7 @@ export const EndgameIcons = {
     <Image
       source={require('../assets/endgameicons/vs.png')}
       alt="vs"
-      style={{ width: w, height: h }}
+      style={{ width: h, height: h }}
       resizeMode="contain"
       key="vs"
     />
