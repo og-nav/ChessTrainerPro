@@ -67,6 +67,25 @@ const Game = ({ route, navigation }: GameProp) => {
     }
   }, [isCorrect, showAnimation]);
 
+  // handling computer move
+  const [currentFen, setCurrentFen] = useState(fen);
+  useEffect(() => {
+    console.log('SUPS');
+    const tempChess = new Chess(chessboardRef.current?.getState().fen);
+    if (tempChess.turn() !== playerTurn && !tempChess.isGameOver()) {
+      const move = Engine.getBestMove(
+        chessboardRef.current?.getState().fen,
+        1
+      ).move;
+      console.log(move);
+      chessboardRef.current?.move({
+        from: move.substring(0, 2),
+        to: move.substring(2, 4),
+      });
+      setCurrentFen(chessboardRef.current?.getState().fen!);
+    }
+  }, [chessboardRef.current?.getState().fen, currentFen]);
+
   return (
     <AnimatedView
       style={{ flex: 1 }}
@@ -80,16 +99,8 @@ const Game = ({ route, navigation }: GameProp) => {
         gestureEnabled={gestureEnabled}
         fen={fen}
         ref={chessboardRef}
-        onMove={async ({ state }) => {
-          const currChess = new Chess(state.fen);
-          /*if (currChess.turn() !== playerTurn) {
-            const move = Engine.getBestMove(state.fen, 1).move;
-            console.log(move);
-            chessboardRef.current?.move({
-              from: move.substring(0, 2),
-              to: move.substring(2, 4),
-            });
-          }*/
+        onMove={({ state }) => {
+          const currChess = new Chess(state.fen)
         }}
         durations={{ move: 250 }}
       />
@@ -104,8 +115,8 @@ const Game = ({ route, navigation }: GameProp) => {
       {showAnimation && (
         <Toast
           isCorrect={isCorrect}
-          correctMessage="Good Work!"
-          incorrectMessage="Try Again!"
+          correctMessage='Good Work!'
+          incorrectMessage='Try Again!'
         />
       )}
     </AnimatedView>
