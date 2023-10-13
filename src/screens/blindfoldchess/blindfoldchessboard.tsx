@@ -7,13 +7,14 @@ import { applyMoves } from '../../util';
 
 const BlindfoldChessBoard = () => {
   const { gameHistory, playAsBlack, blindfoldChessboardRef } = useContext(
-    BlindfoldChessContext,
+    BlindfoldChessContext
   );
   const chessboardRef = useRef<ChessboardRef>(null);
   const [currentFen, setCurrentFen] = useState('');
   useEffect(() => {
     (async () => {
-      const hist = blindfoldChessboardRef?.current?.getState().history;
+      const hist = gameHistory; //blindfoldChessboardRef?.current?.getState().history;
+      console.log(hist);
 
       if (hist && hist.length > 0) {
         const pos = applyMoves(hist as Move[]); //new Chess(chessboardRef.current?.getState().fen);

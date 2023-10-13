@@ -7,7 +7,7 @@ import SidebarButton from './SidebarButton';
 import AnimatedText from './AnimatedText';
 import { primary } from '../contexts/ThemeContext';
 
-const Sidebar: React.FC<DrawerContentComponentProps> = props => {
+const Sidebar: React.FC<DrawerContentComponentProps> = (props) => {
   const { state, navigation } = props;
   const currentRoute = state.routeNames[state.index];
 
@@ -74,13 +74,16 @@ const Sidebar: React.FC<DrawerContentComponentProps> = props => {
         alignItems: 'center',
       }}
       customColors={cc}
-      safe={true}>
+      safe={true}
+    >
       <AnimatedView
         style={{ flex: 1, width: '100%', marginTop: 4 }}
-        customColors={cc}>
+        customColors={cc}
+      >
         <AnimatedView
           customColors={cc}
-          style={{ alignItems: 'flex-end', marginBottom: 4 }}>
+          style={{ alignItems: 'flex-end', marginBottom: 4 }}
+        >
           <AnimatedFeather
             onPress={handlePressBackButton}
             name={'chevron-left'}
@@ -109,14 +112,16 @@ const Sidebar: React.FC<DrawerContentComponentProps> = props => {
         <SidebarButton
           active={currentRoute === 'Endgame Trainer'}
           onPress={handlePressEndgameTrainer}
-          icon="chess-board">
+          icon='chess-board'
+        >
           <AnimatedText
             style={{ fontSize: 16 }}
             customColors={
               currentRoute === 'Endgame Trainer'
                 ? { light: 'white', dark: 'white' }
                 : { light: primary[900], dark: 'white' }
-            }>
+            }
+          >
             Endgame Trainer
           </AnimatedText>
         </SidebarButton>
@@ -124,14 +129,16 @@ const Sidebar: React.FC<DrawerContentComponentProps> = props => {
         <SidebarButton
           active={currentRoute === 'Blindfold Chess'}
           onPress={handlePressBlindfoldChess}
-          icon="chess">
+          icon='chess'
+        >
           <AnimatedText
             style={{ fontSize: 16 }}
             customColors={
               currentRoute === 'Blindfold Chess'
                 ? { light: 'white', dark: 'white' }
                 : { light: primary[900], dark: 'white' }
-            }>
+            }
+          >
             Blindfold Chess
           </AnimatedText>
         </SidebarButton>
@@ -150,21 +157,24 @@ const Sidebar: React.FC<DrawerContentComponentProps> = props => {
             Blindfold Tactics
           </AnimatedText>
           </SidebarButton>
+          */}
 
         <SidebarButton
           active={currentRoute === 'Mind Meld'}
           onPress={handlePressMindMeld}
-          icon="brain">
+          icon='brain'
+        >
           <AnimatedText
             style={{ fontSize: 16 }}
             customColors={
               currentRoute === 'Mind Meld'
                 ? { light: 'white', dark: 'white' }
                 : { light: primary[900], dark: 'white' }
-            }>
+            }
+          >
             Mind Meld
           </AnimatedText>
-        </SidebarButton>*/}
+        </SidebarButton>
 
         {/*<SidebarButton
           active={currentRoute === 'Regular Tactics'}

@@ -69,11 +69,12 @@ const Game = ({ route, navigation }: GameProp) => {
 
   // handling computer move
   const [computerThinking, setComputerThinking] = useState(false);
+  const [isgg, setIsGG] = useState(false);
   useEffect(() => {
     if (computerThinking) {
       const tempChess = new Chess(chessboardRef.current?.getState().fen);
       if (tempChess.turn() !== playerTurn && !tempChess.isGameOver()) {
-        const move = Engine.getBestMove(tempChess.fen(), 1).move;
+        const move = Engine.getBestMove(tempChess.fen(), 3).move;
         chessboardRef.current?.move({
           from: move.substring(0, 2),
           to: move.substring(2, 4),
@@ -101,6 +102,7 @@ const Game = ({ route, navigation }: GameProp) => {
           if (currChess.isGameOver() || currChess.isDraw()) {
             setShowAnimation(true);
             setGestureEnabled(false);
+            setIsGG(true);
             if (
               (currChess.isCheckmate() &&
                 target === 'checkmate' &&
@@ -124,6 +126,11 @@ const Game = ({ route, navigation }: GameProp) => {
       <View style={{ alignItems: 'center' }}>
         <LichessButton onPress={onPressBottomSheet} />
       </View>
+      {computerThinking && !isgg ? (
+        <AnimatedText style={styles.objective}>
+          Computer is thinking...
+        </AnimatedText>
+      ) : null}
       <BottomSheet ref={bottomSheetRef}>
         <WebView style={{ flex: 1 }} source={{ uri: uri }} />
       </BottomSheet>

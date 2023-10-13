@@ -46,7 +46,8 @@ const MindMeld = () => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-        }}>
+        }}
+      >
         <AnimatedTouchableOpacity
           style={styles.button}
           onPress={() => {
@@ -55,7 +56,8 @@ const MindMeld = () => {
             chessboardRef.current?.highlight({
               square: mmSquare,
             });
-          }}>
+          }}
+        >
           <AnimatedText>Show / Hide Pieces</AnimatedText>
         </AnimatedTouchableOpacity>
 
@@ -65,7 +67,12 @@ const MindMeld = () => {
             const newBoard = setupBoard(count);
             setChess(newBoard);
             chessboardRef.current?.resetBoard(newBoard.fen());
-          }}>
+            chessboardRef.current?.resetAllHighlightedSquares();
+            chessboardRef.current?.highlight({
+              square: nextMindMeldSquare(chessboardRef.current?.getState().fen),
+            });
+          }}
+        >
           <AnimatedText>New Board</AnimatedText>
         </AnimatedTouchableOpacity>
       </View>
@@ -75,7 +82,8 @@ const MindMeld = () => {
             light: defaultColors.light.pressable,
             dark: defaultColors.dark.pressable,
           }}
-          style={styles.sliderButton}>
+          style={styles.sliderButton}
+        >
           <AnimatedText>Pieces per Side</AnimatedText>
           <SlidingCounter
             defaultValue={1}
