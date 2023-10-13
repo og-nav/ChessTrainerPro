@@ -68,23 +68,20 @@ const Game = ({ route, navigation }: GameProp) => {
   }, [isCorrect, showAnimation]);
 
   // handling computer move
-  const [currentFen, setCurrentFen] = useState(fen);
+  const [computerThinking, setComputerThinking] = useState(false);
   useEffect(() => {
-    console.log('SUPS');
-    const tempChess = new Chess(chessboardRef.current?.getState().fen);
-    if (tempChess.turn() !== playerTurn && !tempChess.isGameOver()) {
-      const move = Engine.getBestMove(
-        chessboardRef.current?.getState().fen,
-        1
-      ).move;
-      console.log(move);
-      chessboardRef.current?.move({
-        from: move.substring(0, 2),
-        to: move.substring(2, 4),
-      });
-      setCurrentFen(chessboardRef.current?.getState().fen!);
+    if (computerThinking) {
+      const tempChess = new Chess(chessboardRef.current?.getState().fen);
+      if (tempChess.turn() !== playerTurn && !tempChess.isGameOver()) {
+        const move = Engine.getBestMove(tempChess.fen(), 1).move;
+        chessboardRef.current?.move({
+          from: move.substring(0, 2),
+          to: move.substring(2, 4),
+        });
+        setComputerThinking(false);
+      }
     }
-  }, [chessboardRef.current?.getState().fen, currentFen]);
+  }, [computerThinking]);
 
   return (
     <AnimatedView
@@ -100,7 +97,25 @@ const Game = ({ route, navigation }: GameProp) => {
         fen={fen}
         ref={chessboardRef}
         onMove={({ state }) => {
-          const currChess = new Chess(state.fen)
+          const currChess = new Chess(state.fen);
+          if (currChess.isGameOver() || currChess.isDraw()) {
+            setShowAnimation(true);
+            setGestureEnabled(false);
+            if (
+              (currChess.isCheckmate() &&
+                target === 'checkmate' &&
+                currChess.turn() !== playerTurn) ||
+              (currChess.isDraw() && target === 'draw') ||
+              (currChess.isThreefoldRepetition() && target === 'draw')
+            ) {
+              setIsCorrect(true);
+            } else {
+              setIsCorrect(false);
+            }
+          }
+          if (currChess.turn() !== playerTurn) {
+            setComputerThinking(true);
+          }
         }}
         durations={{ move: 250 }}
       />
