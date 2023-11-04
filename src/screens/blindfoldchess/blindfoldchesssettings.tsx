@@ -21,7 +21,13 @@ const BlindfoldChessSettings = () => {
   }, [blindfoldChessboardRef, setGameHistory]);
   return (
     <AnimatedView style={{ flex: 1, alignItems: 'center' }} safe={true}>
-      <AnimatedTouchableOpacity style={styles.button} onPress={newGame}>
+      <AnimatedTouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          newGame();
+          setPlayAsBlack(playAsBlack ? false : true);
+        }}
+      >
         <AnimatedText>New Game</AnimatedText>
       </AnimatedTouchableOpacity>
 
@@ -30,7 +36,8 @@ const BlindfoldChessSettings = () => {
         onPress={() => {
           newGame();
           setPlayAsBlack(playAsBlack ? false : true);
-        }}>
+        }}
+      >
         <AnimatedText>Change sides</AnimatedText>
       </AnimatedTouchableOpacity>
     </AnimatedView>

@@ -47,7 +47,7 @@ const BlindfoldChessBoard = () => {
     })();
   }, [blindfoldChessboardRef, currentFen]);
   return (
-    <AnimatedView style={{ flex: 1 }} safe={true}>
+    <AnimatedView style={{ flex: 1, marginTop: 12  }} safe={true}>
       <Chessboard
         ref={chessboardRef}
         gestureEnabled={false}

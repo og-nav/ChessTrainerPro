@@ -16,7 +16,7 @@ const BlindfoldChessMoves = () => {
   const { gameHistory } = useContext(BlindfoldChessContext);
 
   return (
-    <AnimatedView style={{ flex: 1, alignItems: 'center' }} safe={true}>
+    <AnimatedView style={{ flex: 1, alignItems: 'center', marginTop: 12 }} safe={true}>
       <FlatList
         data={gameHistory}
         renderItem={({ item }) => (

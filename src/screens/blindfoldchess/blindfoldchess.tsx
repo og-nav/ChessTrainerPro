@@ -109,7 +109,8 @@ const FlatListText: React.FC<FlatListTextProps> = ({
         style={{
           fontSize: 17,
           fontWeight: '500',
-        }}>
+        }}
+      >
         {item.tabName}
       </AnimatedText>
     </AnimatedView>
@@ -131,7 +132,7 @@ const Tabs: React.FC<tabProps> = ({ scrollXValue }) => {
             scrollXValue.value,
             [0, width, 2 * width, 3 * width],
             [tabWidths[0], tabWidths[1], tabWidths[2], tabWidths[3]],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
           transform: [
             {
@@ -144,7 +145,7 @@ const Tabs: React.FC<tabProps> = ({ scrollXValue }) => {
                   viewTranslatePoints[2],
                   viewTranslatePoints[3],
                 ],
-                Extrapolation.CLAMP,
+                Extrapolation.CLAMP
               ),
             },
           ],
@@ -214,7 +215,8 @@ const TabBar = () => {
   return (
     <AnimatedView
       //flex={1} pt={top} bg={useColorModeValue('white', 'primary.900')}>
-      style={{ flex: 1, marginTop: top / 2 }}>
+      style={{ flex: 1, marginTop: top / 2 }}
+    >
       <Tabs scrollXValue={scrollValue} />
       <LinearGradient
         colors={['rgba(0,0,0,1)', 'transparent']}

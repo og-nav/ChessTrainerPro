@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { Chess, Move } from 'chess.js';
 import Navbar from '../components/Navbar';
 import {
@@ -12,6 +12,8 @@ import { nextMindMeldSquare, setupBoard } from '../util';
 import Chessboard, { ChessboardRef } from '../components/chessboard';
 import SlidingCounter from '../components/SlidingCounter';
 import { defaultColors } from '../contexts/ThemeContext';
+
+const { height, width } = Dimensions.get('window');
 
 const MindMeld = () => {
   const [count, setCount] = useState(1);
@@ -51,36 +53,39 @@ const MindMeld = () => {
   return (
     <AnimatedView style={{ flex: 1 }} safe={true}>
       <Navbar />
-      <Chessboard
-        fen={chess.fen()}
-        ref={chessboardRef}
-        onMove={({ state }) => {
-          if (
-            (state.history.slice(-1)[0] as Move).flags === 'c' ||
-            (state.history.slice(-1)[0] as Move).to !== mmSquare
-          ) {
-            chessboardRef.current?.undo();
-            setIsCorrect(false);
-            setShowAnimation(true);
-          } else {
-            chessboardRef.current?.resetAllHighlightedSquares();
-            chessboardRef.current?.highlight({
-              square: (() => {
-                const next = nextMindMeldSquare(state.fen);
-                setChess(new Chess(state.fen));
-                setMMSquare(next);
-                return next;
-              })(),
-            });
-          }
-        }}
-        blindfold={showPieces}
-      />
+
+        <Chessboard
+          fen={chess.fen()}
+          ref={chessboardRef}
+          onMove={({ state }) => {
+            if (
+              (state.history.slice(-1)[0] as Move).flags === 'c' ||
+              (state.history.slice(-1)[0] as Move).to !== mmSquare
+            ) {
+              chessboardRef.current?.undo();
+              setIsCorrect(false);
+              setShowAnimation(true);
+            } else {
+              chessboardRef.current?.resetAllHighlightedSquares();
+              chessboardRef.current?.highlight({
+                square: (() => {
+                  const next = nextMindMeldSquare(state.fen);
+                  setChess(new Chess(state.fen));
+                  setMMSquare(next);
+                  return next;
+                })(),
+              });
+            }
+          }}
+          blindfold={showPieces}
+        />
+   
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
+          marginTop: 4,
         }}
       >
         <AnimatedTouchableOpacity
@@ -99,8 +104,8 @@ const MindMeld = () => {
         <AnimatedTouchableOpacity style={styles.button} onPress={resetBoard}>
           <AnimatedText>New Board</AnimatedText>
         </AnimatedTouchableOpacity>
-      </View>
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        </View>
+        <View style={{ flex: 1, alignItems: 'center'}}>
         <AnimatedView
           customColors={{
             light: defaultColors.light.pressable,
@@ -112,12 +117,13 @@ const MindMeld = () => {
           <SlidingCounter
             defaultValue={1}
             minValue={1}
-            maxValue={5}
+            maxValue={3}
             count={count}
             setCount={setCount}
           />
         </AnimatedView>
-      </View>
+        </View>
+     
       {showAnimation && (
         <Toast
           isCorrect={isCorrect}
@@ -142,8 +148,8 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   sliderButton: {
-    height: 170,
-    width: 250,
+    height: 120,
+    width: 200,
     justifyContent: 'space-evenly',
     alignItems: 'center',
     borderRadius: 10,

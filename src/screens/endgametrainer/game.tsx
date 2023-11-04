@@ -19,7 +19,7 @@ import LichessButton from '../../components/LichessButton';
 import Chessboard, { ChessboardRef } from '../../components/chessboard';
 import BottomSheet, { BottomSheetRefProps } from '../../components/BottomSheet';
 import { Chess } from 'chess.js';
-//import { sharedTransition } from '../../components/TransitionAnimation';
+import { sharedTransition } from '../../components/TransitionAnimation';
 const Na_Vinci = require('../../engine/Na_Vinci');
 const Engine = new Na_Vinci();
 
@@ -75,13 +75,23 @@ const Game = ({ route, navigation }: GameProp) => {
       const tempChess = new Chess(chessboardRef.current?.getState().fen);
       if (tempChess.turn() !== playerTurn && !tempChess.isGameOver()) {
         const move = Engine.getBestMove(tempChess.fen(), 3).move;
-        chessboardRef.current?.move({
-          from: move.substring(0, 2),
-          to: move.substring(2, 4),
-        });
+        const makeMove = async () => {
+          await chessboardRef.current?.move({
+            from: move.substring(0, 2),
+            to: move.substring(2, 4),
+          });
+        };
+        makeMove();
         setComputerThinking(false);
       }
     }
+    /*
+    const timeout = setTimeout(() => {
+      setComputerThinking(false);
+    }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };*/
   }, [computerThinking]);
 
   return (
@@ -122,18 +132,20 @@ const Game = ({ route, navigation }: GameProp) => {
         durations={{ move: 250 }}
       />
       <AnimatedText style={styles.objective}>Objective: {target}</AnimatedText>
-
-      <View style={{ alignItems: 'center' }}>
-        <LichessButton onPress={onPressBottomSheet} />
-      </View>
       {computerThinking && !isgg ? (
         <AnimatedText style={styles.objective}>
           Computer is thinking...
         </AnimatedText>
       ) : null}
+      {/*
+      <View style={{ alignItems: 'center' }}>
+        <LichessButton onPress={onPressBottomSheet} />
+      </View> 
+
       <BottomSheet ref={bottomSheetRef}>
         <WebView style={{ flex: 1 }} source={{ uri: uri }} />
       </BottomSheet>
+      */}
       {showAnimation && (
         <Toast
           isCorrect={isCorrect}

@@ -4,6 +4,7 @@ import { BlindfoldChessContext } from '../../contexts/BlindfoldChessContext';
 import Chessboard from '../../components/chessboard';
 import { Chess, Move } from 'chess.js';
 import { applyMoves } from '../../util';
+import { AnimatedText } from '../../components';
 const Na_Vinci = require('../../engine/Na_Vinci');
 
 const BlindfoldChessPlay = () => {
@@ -12,6 +13,25 @@ const BlindfoldChessPlay = () => {
   const [NaVinci] = useState(new Na_Vinci());
   const [gestureEnabled, setGestureEnabled] = useState(true);
   const playerTurn = playAsBlack ? 'b' : 'w';
+  useEffect(() => {
+    if (playAsBlack && gameHistory.length == 0) {
+      const tempChess = new Chess();
+      const move = NaVinci.getBestMove(tempChess.fen(), 1).move;
+      blindfoldChessboardRef?.current?.move({
+        from: move.substring(0, 2),
+        to: move.substring(2, 4),
+      });
+      tempChess.move(move);
+      setComputerThinking(false);
+      const lastMove = tempChess.undo();
+      const hist = tempChess.history() as unknown as Move[];
+      if (lastMove) {
+        hist.push(lastMove);
+      }
+
+      setGameHistory(hist);
+    }
+  }, [playAsBlack]);
 
   const getBestMove = useCallback(
     async (fen: string) => {
@@ -74,8 +94,10 @@ const BlindfoldChessPlay = () => {
       const tempChess = new Chess(
         blindfoldChessboardRef?.current?.getState().fen
       );
+      //const tempChess = applyMoves(gameHistory);
+      //console.log(tempChess.history());
       if (tempChess.turn() !== playerTurn && !tempChess.isGameOver()) {
-        const move = NaVinci.getBestMove(tempChess.fen(), 3).move;
+        const move = NaVinci.getBestMove(tempChess.fen(), 1).move;
         blindfoldChessboardRef?.current?.move({
           from: move.substring(0, 2),
           to: move.substring(2, 4),
@@ -83,7 +105,7 @@ const BlindfoldChessPlay = () => {
         tempChess.move(move);
         setComputerThinking(false);
         const lastMove = tempChess.undo();
-        const hist = tempChess.history as unknown as Move[];
+        const hist = tempChess.history() as unknown as Move[];
         if (lastMove) {
           hist.push(lastMove);
         }
@@ -94,7 +116,7 @@ const BlindfoldChessPlay = () => {
   }, [computerThinking]);
 
   return (
-    <AnimatedView style={{ flex: 1 }} safe={true}>
+    <AnimatedView style={{ flex: 1, marginTop: 12 }} safe={true}>
       <Chessboard
         gestureEnabled={gestureEnabled}
         blindfold={true}
@@ -108,6 +130,13 @@ const BlindfoldChessPlay = () => {
           }
         }}
       />
+      {computerThinking ? (
+        <AnimatedText style={{fontSize: 17,
+          textAlign: 'center',
+          margin: 10,}}>
+          Computer is thinking...
+        </AnimatedText>
+      ) : null}
     </AnimatedView>
   );
 };

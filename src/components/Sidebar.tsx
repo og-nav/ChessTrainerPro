@@ -125,7 +125,7 @@ const Sidebar: React.FC<DrawerContentComponentProps> = (props) => {
             Endgame Trainer
           </AnimatedText>
         </SidebarButton>
-
+        {/*
         <SidebarButton
           active={currentRoute === 'Blindfold Chess'}
           onPress={handlePressBlindfoldChess}
@@ -142,7 +142,7 @@ const Sidebar: React.FC<DrawerContentComponentProps> = (props) => {
             Blindfold Chess
           </AnimatedText>
         </SidebarButton>
-        {/*
+       
         <SidebarButton
           active={currentRoute === 'Blindfold Tactics'}
           onPress={handlePressBlindfoldTactics}

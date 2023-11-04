@@ -10,7 +10,7 @@ import {
   DrawerParamList,
   EndgameNavigatorParamList,
 } from '../../navigation/types';
-//import { sharedTransition } from '../../components/TransitionAnimation';
+import { sharedTransition } from '../../components/TransitionAnimation';
 
 type PositionsProp = CompositeScreenProps<
   NativeStackScreenProps<EndgameNavigatorParamList, 'Positions'>,
